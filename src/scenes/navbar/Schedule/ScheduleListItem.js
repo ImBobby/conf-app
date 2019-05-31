@@ -42,7 +42,7 @@ export function ScheduleListItem(props: Props) {
       </View>
     );
   }
-  presenterPicture = presenter.profilePictureUri || DEFAULT_AVATAR;
+  presenterPicture = { uri: presenter.profilePictureUri } || DEFAULT_AVATAR;
   presenterName = presenter.name;
 
   return (

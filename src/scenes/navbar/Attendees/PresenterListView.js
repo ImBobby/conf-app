@@ -63,7 +63,7 @@ export default class PresenterListView extends Component<Props, void> {
 
   _renderItem({item: presenter}: PresenterListItem) {
     let {navigate} = this.props.navigation;
-    let avatarProps = presenter.profilePictureUri || DEFAULT_AVATAR;
+    let avatarProps = { uri:presenter.profilePictureUri } || DEFAULT_AVATAR;
     return (
       <ListItem
         key={presenter.id}

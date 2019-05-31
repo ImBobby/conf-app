@@ -3,8 +3,6 @@ import {AsyncStorage} from 'react-native';
 
 import {BOOKMARKED_SCHEDULE_KEY} from '../constants/asyncStorageKey';
 
-import presenterListJSON from '../fixtures/Presenter-fixture.js';
-import scheduleListJSON from '../fixtures/Schedule-fixture.js';
 import exhibitorListJSON from '../fixtures/Exhibitor-fixture.js';
 
 import convertArrayToMap from '../helpers/convertArrayToMap';
@@ -12,6 +10,11 @@ import convertArrayToMap from '../helpers/convertArrayToMap';
 import type {Dispatch} from '../types';
 
 export default async function populateInitialData(dispatch: Dispatch) {
+  const requestSpeakers = await fetch('https://hackday-geekcamp-id.herokuapp.com/api/speakers.json');
+  const requestSchedules = await fetch('https://hackday-geekcamp-id.herokuapp.com/api/schedules.json');
+  const { speakers } = await requestSpeakers.json();
+  const { schedules } = await requestSchedules.json();
+
   let bookmarkedScheduleListString = await AsyncStorage.getItem(
     BOOKMARKED_SCHEDULE_KEY,
   );
@@ -21,8 +24,8 @@ export default async function populateInitialData(dispatch: Dispatch) {
   dispatch({
     type: 'INITIAL_DATA_RECEIVED',
     initialData: {
-      presenterList: convertArrayToMap(presenterListJSON),
-      scheduleList: convertArrayToMap(scheduleListJSON),
+      presenterList: convertArrayToMap(speakers),
+      scheduleList: convertArrayToMap(schedules),
       bookmarkedScheduleList,
       exhibitorList: convertArrayToMap(exhibitorListJSON),
     },

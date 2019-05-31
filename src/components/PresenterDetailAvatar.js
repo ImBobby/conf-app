@@ -45,7 +45,7 @@ export default function PresenterDetailAvatar(props: Props) {
     profilePictureComponent = (
       <ImageBackground
         style={[styles.avatar, avatarStyle]}
-        source={props.profilePictureUri}
+        source={{ uri: props.profilePictureUri }}
       >
         <LinearGradient
           colors={[

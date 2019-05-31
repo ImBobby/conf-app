@@ -78,7 +78,7 @@ export class HomeScene extends Component<Props, State> {
       events = upcomingSchedule;
     }
 
-    let filteredEvents = events.filter((event) => event.presenters).slice(0, 5);
+    let filteredEvents = events.filter((event) => event.presenters[0] !== null).slice(0, 5);
 
     return (
       <ScrollView style={styles.root}>
@@ -156,7 +156,7 @@ export class HomeScene extends Component<Props, State> {
               }}
             >
               <Image
-                source={presenter.profilePictureUri || DEFAULT_PROFILE_PICTURE}
+                source={{ uri: presenter.profilePictureUri } || DEFAULT_PROFILE_PICTURE}
                 style={{
                   width: Math.min(AVATAR_SIZE / (length * 0.4), AVATAR_SIZE),
                   height: Math.min(AVATAR_SIZE / (length * 0.4), AVATAR_SIZE),
